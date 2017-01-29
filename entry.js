@@ -6,6 +6,6 @@ import App from './components/app.js'
 
 // import MyComponent from 'components/my_component';
 require("file?name=[name].[ext]!./index.html");
-require("!css-loader!sass-loader!./styles.scss");
+require("!style-loader!css-loader!sass-loader!./styles.scss");
 
 ReactDOM.render(<App />, document.getElementById("placeholder"));
