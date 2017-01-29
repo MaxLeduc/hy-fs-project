@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Include your React components like this:
-// import MyComponent from 'components/my_component';
+import App from './components/app.js'
 
-ReactDOM.render(<div>React Element goes here</div>, document.getElementById("placeholder"));
+// import MyComponent from 'components/my_component';
+require("file?name=[name].[ext]!./index.html");
+require("!css-loader!sass-loader!./styles.scss");
+
+ReactDOM.render(<App />, document.getElementById("placeholder"));
