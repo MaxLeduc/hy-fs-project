@@ -18,8 +18,8 @@ var Header = React.createClass({
     },
     render: function() {
         return <header>
-            <h1>{this.state.name}</h1>
-        <h3>Made by the coolest developers you'll ever know, <a href={"https://twitter.com/" + this.state.makers[0].twitter}>{this.state.makers[0].name}</a> and <a href={"https://twitter.com/" + this.state.makers[1].twitter}>{this.state.makers[1].name}</a>  </h3>
+            <h1>{ this.state.name }</h1>
+        <h3>Made by the coolest developers you will ever know, <a href={ "https://twitter.com/" + this.state.makers[0].twitter  }>{ this.state.makers[0].name }</a> and <a href={ "https://twitter.com/" + this.state.makers[1].twitter }>{ this.state.makers[1].name }</a>  </h3>
         </header>
     }
 })
