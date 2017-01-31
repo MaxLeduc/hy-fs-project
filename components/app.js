@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from './header';
 
 var App = React.createClass({
   getInitialState: function () {
@@ -27,7 +28,9 @@ var App = React.createClass({
   },
 
   render: function () {
-    return <h1>hello from the other siiiiiiiiiiiiiiiide</h1>
+    return <div>
+		<Header />
+	</div>
   }
 })
 
