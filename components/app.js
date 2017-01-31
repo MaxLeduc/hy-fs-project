@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './header';
 import FormItem from './form';
 
+import Footer from './footer.js';
+
 var App = React.createClass({
     getInitialState: function() {
         return {
@@ -26,6 +28,7 @@ var App = React.createClass({
         return <div>
             <Header />
             { this.state.options.map((option, i) => <FormItem title={ option.title } votes={ option.votes } key={ i }/>)}
+            <Footer />
         </div>
     }
 })
