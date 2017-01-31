@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Footer from './footer.js';
+
 var App = React.createClass({
   getInitialState: function () {
     return {
@@ -27,7 +29,12 @@ var App = React.createClass({
   },
 
   render: function () {
-    return <h1>hello from the other siiiiiiiiiiiiiiiide</h1>
+    return (
+      <div>
+        <h1>hello from the other siiiiiiiiiiiiiiiide</h1>
+        <Footer />
+      </div>  
+    )
   }
 })
 
