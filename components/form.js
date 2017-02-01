@@ -2,10 +2,12 @@ import React from 'react';
 
 var FormItem = React.createClass({
     render: function(){
-        return <div className="form-item" key={this.props.key}>
-            <label for={ "option" + this.props.key }>{ this.props.title }</label>
-            <input type="checkbox" id={ "option" + this.props.key } />
-        </div>
+        return (
+        	<div className="form-item" data-index={this.props.indexNumber}>
+	            <label htmlFor={ "option" + this.props.indexNumber }>{ this.props.title }</label>
+	            <input type="checkbox" id={ "option" + this.props.indexNumber } />
+        	</div>
+        )
     }
 })
 
