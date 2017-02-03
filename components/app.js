@@ -1,35 +1,48 @@
 import React from 'react';
 import Header from './header';
 import FormItem from './form';
-
+import Result from './results.js';
 import Footer from './footer.js';
 
-var App = React.createClass({
-    getInitialState: function() {
-        return {
-        issues: [
-          {
-            title: 'Let\'s go out!',
-            description: 'We are going out like crazyyy people this Monday night, in Oshawa.',
-            options: [
-              {
-                title: 'Option1 is this',
-                votes: 0
-              },
-              {
-                title: 'Option2 is this',
-                votes: 3
-              },
-              {
-                title: 'Option3 is this',
-                votes: 2
-              }
+class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            issues: [
+                {
+                    title: 'Let\'s go out!',
+                    description: 'We are going out like crazyyy people this Monday night, in Oshawa.',
+                    options: [
+                        {
+                            title: 'Option1 is this',
+                            votes: 0
+                        },
+                        {
+                            title: 'Option2 is this',
+                            votes: 3
+                        },
+                        {
+                            title: 'Option3 is this',
+                            votes: 2
+                        }
+                    ]
+                }
             ]
-          }
-        ]
-      }
-    },
-    render: function() {
+        };
+        this.calculateVotes = this.calculateVotes.bind(this);
+    }
+
+    calculateVotes(i) {
+        const options = this.state.issues[0].options;
+        options[i].votes = options[i].votes + 1;
+        this.setState({
+            issues: [{
+                options: options
+            }]
+        })
+    }
+
+    render() {
         return (
         <div>
           <Header />
@@ -56,10 +69,17 @@ var App = React.createClass({
             </fieldset>
             <input type="submit" value="submit" />
           </form>
+          { this.state.issues[0].options.map((option, i) => (
+              <Result option={ option.title }
+                  votes={ option.votes }
+                  key = { i }
+                  calculateVotes = { () => this.calculateVotes(i) }
+              />
+          ))}
           <Footer />
         </div>
       )
     }
-})
+}
 
 export default App;
