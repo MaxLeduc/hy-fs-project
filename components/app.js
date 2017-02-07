@@ -1,5 +1,7 @@
 import React from 'react';
-import {Fieldset, Field, createValue} from 'react-forms'
+import firebase from 'firebase';
+
+import './database.js';
 
 import Header from './header';
 import Form from './form';
@@ -46,8 +48,14 @@ class App extends React.Component {
             <div>
                 <Header/>
                 <Form/>
-                {this.state.issues[0].options.map((option, i) => (<Result option={option.title} votes={option.votes} key={i} calculateVotes= { () => this.calculateVotes(i) }/>))}
-                <AddOption newOption={ (options) => this.addOption(options) } options={ this.state.issues[0].options } />
+                { this.state.issues[0].options.map((option, i) => (
+                    <Result option={ option.title }
+                            votes={ option.votes }
+                            key={ i }
+                            calculateVotes= { () => this.calculateVotes(i) }/>
+                ))}
+                <AddOption newOption={ (options) => this.addOption(options) }
+                            options={ this.state.issues[0].options } />
                 <Footer/>
             </div>
         )
@@ -62,6 +70,11 @@ class App extends React.Component {
                     options: options
                 }
             ]
+        })
+
+        const firebaseRef = firebase.database().ref();
+        firebaseRef.set({
+            issues: this.state.issues
         })
     }
 }
