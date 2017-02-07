@@ -4,6 +4,7 @@ import {Fieldset, Field, createValue} from 'react-forms'
 import Header from './header';
 import Form from './form';
 import Result from './results.js';
+import AddOption from './addOption.js';
 import Footer from './footer.js';
 
 class App extends React.Component {
@@ -32,17 +33,26 @@ class App extends React.Component {
         this.calculateVotes = this.calculateVotes.bind(this);
     }
 
+    addOption(options) {
+		this.setState({
+			issues: [{
+				options: options
+			}]
+		})
+	}
+
     render() {
         return (
             <div>
                 <Header/>
-                {this.state.issues[0].options.map((option, i) => (<Result option={option.title} votes={option.votes} key={i} calculateVotes= { () => this.calculateVotes(i) }/>))}
                 <Form/>
+                {this.state.issues[0].options.map((option, i) => (<Result option={option.title} votes={option.votes} key={i} calculateVotes= { () => this.calculateVotes(i) }/>))}
+                <AddOption newOption={ (options) => this.addOption(options) } options={ this.state.issues[0].options } />
                 <Footer/>
             </div>
         )
     }
-    
+
     calculateVotes(i) {
         const options = this.state.issues[0].options;
         options[i].votes = options[i].votes + 1;
