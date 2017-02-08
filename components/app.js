@@ -1,10 +1,14 @@
 import React from 'react';
+import ReactDom from 'react-dom';
+
 import firebase from 'firebase';
 
 import './database.js';
 
 import Header from './header';
 import Form from './form';
+import Heading from './heading';
+import Preview from './preview';
 import Result from './results.js';
 import AddOption from './addOption.js';
 import Footer from './footer.js';
@@ -15,55 +19,58 @@ class App extends React.Component {
         this.state = {
             formObject: {
                 title: '',
-                description: '',
+                desc: '',
                 options: [
                     {
-                        'description': 'this is an option',
+                        'desc': '',
                         'votes': 0
                     }, {
-                        'description': 'another option',
+                        'desc': '',
                         'votes': 0
                     }
                 ],
                 newOption: ''
             }
         };
-        this.calculateVotes = this.calculateVotes.bind(this);
-        this.updateForm = this.updateForm.bind(this)
-    }
 
-    addOption(options) {
-		this.setState({
-			formObject: [{
-				options: options
-			}]
-		})
-	}
+        this.calculateVotes = this.calculateVotes.bind(this);
+        this.updateForm = this.updateForm.bind(this);
+        this.addOption = this.addOption.bind(this)
+    }
 
     render() {
         return (
             <div>
-                <Header/>
+                <Header />
                 <Form formObject={ this.state.formObject } updateForm = { this.updateForm }/>
+                <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc }/>
                 { this.state.formObject.options.map((option, i) => (
-                    <Result option={ option.title }
+                    <Preview option={ option.desc }
+                    key={ i }/>
+                ))}
+                { this.state.formObject.options.map((option, i) => (
+                    <Result option={ option.desc }
                             votes={ option.votes }
                             key={ i }
                             calculateVotes= { () => this.calculateVotes(i) }/>
                 ))}
-                <AddOption newOption={ (options) => this.addOption(options) }
-                            options={ this.state.formObject.options } />
                 <Footer/>
             </div>
         )
+    }
+
+    addOption(options) {
+        this.setState({
+            formObject: [{
+                options: options
+            }]
+        })
     }
 
     updateForm(formValues) {
         this.setState({
             formObject: formValues
         })
-
-        console.log(formValues)
     }
 
     calculateVotes(i) {

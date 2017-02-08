@@ -26,9 +26,9 @@ class Form extends React.Component {
             <fieldset>
                 <label>Description</label>
                 <input type="textarea"
-                        name="description"
+                        name="desc"
                         onChange={ (evt) => this.updateFormObject(evt) }
-                        value={ this.props.formObject.description }/>
+                        value={ this.props.formObject.desc }/>
             </fieldset>
 
             {this.props.formObject.options.map((option, i) => (
@@ -37,7 +37,7 @@ class Form extends React.Component {
                     <input type="textarea"
                             name={ i }
                             onChange={ (evt) => this.updateOptionsValues(evt) }
-                            value={ option.description }/>
+                            value={ option.desc }/>
                 </fieldset>
             ))}
 
@@ -56,19 +56,17 @@ class Form extends React.Component {
 
     updateFormObject(evt) {
         let input = evt.target;
-
         let formValues = Object.assign( this.props.formObject );
 
         formValues[input.name] = input.value;
-
         this.props.updateForm(formValues)
     }
 
     updateOptionsValues(evt) {
         let input = evt.target;
         let formValues = Object.assign(this.props.formObject);
-        formValues.options[input.name].description = input.value;
 
+        formValues.options[input.name].desc = input.value;
         this.props.updateForm(formValues)
     }
 
@@ -76,7 +74,8 @@ class Form extends React.Component {
         evt.preventDefault();
         let inputValue = evt.target.value;
         let formValues = Object.assign(this.props.formObject);
-        formValues.options.push({'description': formValues.newOption});
+
+        formValues.options.push({'desc': formValues.newOption, 'votes': 0});
         formValues.newOption = '';
         this.props.updateForm(formValues)
     }
@@ -84,7 +83,9 @@ class Form extends React.Component {
     onSubmit(evt) {
         evt.preventDefault();
         let formValues = Object.assign(this.props.formObject);
+
         this.props.updateForm(formValues)
+        console.log(formValues, 'formvalues-form.js')
     }
 };
 
