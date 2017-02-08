@@ -1,28 +1,15 @@
 import React from 'react';
 import firebase from 'firebase';
-
 import './database.js';
 
 class Form extends React.Component {
     constructor() {
         super();
-        this.state = {
-            formObject: {
-                title: '',
-                description: '',
-                options: [
-                    {
-                        'description': 'this is an option'
-                    }, {
-                        'description': 'another option'
-                    }
-                ],
-                newOption: ''
-            }
-        };
+
         this.updateFormObject = this.updateFormObject.bind(this);
         this.updateOptionsValues = this.updateOptionsValues.bind(this);
         this.addAnOption = this.addAnOption.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     render() {
@@ -33,7 +20,7 @@ class Form extends React.Component {
                 <input type="textarea"
                         name="title"
                         onChange={ (evt) => this.updateFormObject(evt) }
-                        value={ this.state.formObject.title }/>
+                        value={ this.props.formObject.title }/>
             </fieldset>
 
             <fieldset>
@@ -41,10 +28,10 @@ class Form extends React.Component {
                 <input type="textarea"
                         name="description"
                         onChange={ (evt) => this.updateFormObject(evt) }
-                        value={ this.state.formObject.description }/>
+                        value={ this.props.formObject.description }/>
             </fieldset>
 
-            {this.state.formObject.options.map((option, i) => (
+            {this.props.formObject.options.map((option, i) => (
                 <fieldset key={ i }>
                     <label>Option { i + 1 }</label>
                     <input type="textarea"
@@ -58,11 +45,11 @@ class Form extends React.Component {
                 <input type="textarea"
                         name="newOption"
                         onChange={ (evt) => this.updateFormObject(evt) }
-                        value={ this.state.formObject.newOption }/>
-                <button onClick={ (evt) => this.addAnOption(evt) }>Add an option</button>
+                        value={ this.props.formObject.newOption }/>
+                <button onClick={(evt) => this.addAnOption(evt)}>Add an option</button>
             </fieldset>
 
-            <input type="submit"/>
+            <button onClick={ (evt) => this.onSubmit(evt)}>Submit</button>
 
         </form>
     }
@@ -70,27 +57,34 @@ class Form extends React.Component {
     updateFormObject(evt) {
         let input = evt.target;
 
-        let formValues = Object.assign( this.state.formObject );
+        let formValues = Object.assign( this.props.formObject );
 
         formValues[input.name] = input.value;
 
-        this.setState({formObject: formValues});
+        this.props.updateForm(formValues)
     }
 
     updateOptionsValues(evt) {
         let input = evt.target;
-        let formValues = Object.assign(this.state.formObject);
+        let formValues = Object.assign(this.props.formObject);
         formValues.options[input.name].description = input.value;
-        this.setState({formObject: formValues});
+
+        this.props.updateForm(formValues)
     }
 
     addAnOption(evt) {
         evt.preventDefault();
         let inputValue = evt.target.value;
-        let formValues = Object.assign(this.state.formObject);
+        let formValues = Object.assign(this.props.formObject);
         formValues.options.push({'description': formValues.newOption});
         formValues.newOption = '';
-        this.setState({formObject: formValues});
+        this.props.updateForm(formValues)
+    }
+
+    onSubmit(evt) {
+        evt.preventDefault();
+        let formValues = Object.assign(this.props.formObject);
+        this.props.updateForm(formValues)
     }
 };
 
