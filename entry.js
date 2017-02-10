@@ -12,10 +12,6 @@ require("file?name=[name].[ext]!./index.html");
 require("!style-loader!css-loader!sass-loader!./styles.scss");
 
 ReactDOM.render(
-    <Router history={browserHistory}>
-        <Route path="/" component={ App }>
-            <Route path="main" component={ Form } />
-        </Route>
-    </Router>,
+    <App />,
     document.getElementById("placeholder")
 );
