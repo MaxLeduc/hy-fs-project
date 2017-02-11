@@ -15,7 +15,7 @@ class AddOption extends React.Component {
 
         if(optionValue.length > 0) {
             this.refs.optionValue.value ='';
-            newOption.title = optionValue;
+            newOption.desc = optionValue;
             newOption.votes = 0;
             options.push(newOption);
             this.props.newOption(options)
@@ -23,7 +23,7 @@ class AddOption extends React.Component {
     }
 
     render() {
-        return <form onSubmit={ this.newOption }>
+        return <form>
             <input type="text"
                 className="form-control"
                 placeholder="Add a new option"
