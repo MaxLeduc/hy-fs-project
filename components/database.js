@@ -2,10 +2,10 @@ import firebase from 'firebase';
 
 // Initialize Firebase
 const config = {
-  apiKey: "AIzaSyDsHqbmegg7iQXA4nkQfs9GdvibiS2RfDE",
-  authDomain: "voting-app-1d8e6.firebaseapp.com",
-  databaseURL: "https://voting-app-1d8e6.firebaseio.com",
-  storageBucket: "voting-app-1d8e6.appspot.com",
-  messagingSenderId: "932233820347"
+  apiKey: "AIzaSyAZjbuNZL_nWRRTHm13R2euQiZrMvmHp9g",
+  authDomain: "voting-app-a13b2.firebaseapp.com",
+  databaseURL: "https://voting-app-a13b2.firebaseio.com",
+  storageBucket: "voting-app-a13b2.appspot.com",
+  messagingSenderId: "1073036213735"
 };
 firebase.initializeApp(config);

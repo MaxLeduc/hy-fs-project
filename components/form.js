@@ -1,11 +1,9 @@
 import React from 'react';
 import firebase from 'firebase';
-import './database.js';
 
 class Form extends React.Component {
     constructor() {
         super();
-
         this.updateFormObject = this.updateFormObject.bind(this);
         this.updateOptionsValues = this.updateOptionsValues.bind(this);
         this.addAnOption = this.addAnOption.bind(this);
@@ -57,7 +55,6 @@ class Form extends React.Component {
     updateFormObject(evt) {
         let input = evt.target;
         let formValues = Object.assign( this.props.formObject );
-
         formValues[input.name] = input.value;
         this.props.updateForm(formValues)
     }
@@ -82,10 +79,10 @@ class Form extends React.Component {
 
     onSubmit(evt) {
         evt.preventDefault();
-        let formValues = Object.assign(this.props.formObject);
-
-        this.props.updateForm(formValues)
-        console.log(formValues, 'formvalues-form.js')
+        const formValues = Object.assign(this.props.formObject);
+        delete formValues.newOption
+        const firebaseRef = firebase.database().ref('formValues');
+        firebaseRef.push(formValues)
     }
 };
 
