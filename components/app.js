@@ -7,6 +7,7 @@ import './database.js';
 import Header from './header';
 import SubmissionForm from './submissionForm';
 import RenderingForm from './renderingForm';
+import Result from './results';
 import AddOption from './addOption';
 import Footer from './footer';
 
