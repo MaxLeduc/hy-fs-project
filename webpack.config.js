@@ -1,7 +1,7 @@
 module.exports = {
     entry: "./entry.js",
     output: {
-        path: "dist",
+        path: "/",
         filename: "bundle.js"
     },
     module: {
@@ -14,7 +14,7 @@ module.exports = {
                     presets: ['react', 'es2015']
                 }
             }, 
-            [{
+            {
               test: /\.scss$/,
               use: [{
                 loader: "style-loader" // creates style nodes from JS strings
@@ -25,7 +25,7 @@ module.exports = {
               {
                 loader: "sass-loader" // compiles Sass to CSS
               }]
-          }]
+          }
         ]
     },
     devServer: {

@@ -15,10 +15,10 @@ class SubmissionForm extends React.Component {
                 options: [
                     {
                         'desc': '',
-                        'votes': 0
+                        'users': []
                     }, {
                         'desc': '',
-                        'votes': 0
+                        'users': []
                     }
                 ],
                 newOption: ''

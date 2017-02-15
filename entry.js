@@ -8,8 +8,8 @@ import App from './components/app.js';
 import Form from './components/form';
 
 // import MyComponent from 'components/my_component';
-require("file?name=[name].[ext]!./index.html");
-require("!style-loader!css-loader!sass-loader!./styles.scss");
+require("file-loader?name=[name].[ext]!./index.html");
+require("./styles.scss");
 
 ReactDOM.render(
     <App />,
