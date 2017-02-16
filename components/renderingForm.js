@@ -7,7 +7,7 @@ import Heading from './heading';
 import Preview from './preview';
 import Result from './results';
 
-class RenderingForm extends React.Component {
+export default class RenderingForm extends React.Component {
   constructor() {
         super();
         this.state = {
@@ -43,5 +43,3 @@ class RenderingForm extends React.Component {
       });
     }
 }
-
-export default RenderingForm
