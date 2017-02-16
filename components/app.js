@@ -11,21 +11,46 @@ import Result from './results';
 import AddOption from './addOption';
 import Footer from './footer';
 
+import SignIn from './signIn';
+
 class App extends React.Component {
     constructor() {
         super();
+        this.state = {
+            loggedIn: false,
+            currentUser: null
+        }
         this.calculateVotes = this.calculateVotes.bind(this);
+        this.login = this.login.bind(this);
     }
 
     render() {
-        return (
-            <div>
-                <Header />
-                <SubmissionForm />
-                <RenderingForm />
-                <Footer/>
-            </div>
-        )
+        if(this.state.loggedIn == true) {
+            return (
+                <div>
+                    <Header />
+                    <SubmissionForm />
+                    <RenderingForm />
+                    <Footer/>
+                </div>
+            )
+        } else {
+            return <SignIn onLogIn={ (username) => this.login(userName) }/>
+        }
+    }
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user) {
+                this.setState({ loggedIn: true, currentUser: user.displayName })
+            } else {
+                this.setState({ loggedIn: false })
+            }
+        })
+    }
+
+    login(userName) {
+        this.setState({ currentUser: userName })
     }
 
     calculateVotes(i) {
