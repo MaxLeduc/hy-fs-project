@@ -1,7 +1,7 @@
 module.exports = {
     entry: "./entry.js",
     output: {
-        path: "/",
+        path: require('path').resolve('.'),
         filename: "bundle.js"
     },
     module: {
@@ -16,15 +16,7 @@ module.exports = {
             }, 
             {
               test: /\.scss$/,
-              use: [{
-                loader: "style-loader" // creates style nodes from JS strings
-              },
-              {
-                loader: "css-loader" // translates CSS into CommonJS
-              },
-              {
-                loader: "sass-loader" // compiles Sass to CSS
-              }]
+              loaders: ["style-loader", "css-loader", "sass-loader"]
           }
         ]
     },
