@@ -1,0 +1,31 @@
+
+firebase.auth().onAuthStateChanged(user => user.uid) -> ABCD
+
+formObject: {
+                title: '',
+                desc: '',
+                options: [
+                    {
+                        'desc': '',
+                        'users': []
+                    }, {
+                        'desc': '',
+                        'users': []
+                    }
+                ],
+                newOption: ''
+            }
+
+const users = formObject.options.map(option => option.users);
+
+[[1,2,3,4], [5,6,7,8]];
+
+const flattenedUsers = [].concat(users);
+
+[1,2,3,4,5,6,7,8]
+
+const didUserVote = flattenedUsers.indexOf(user.uid) > -1
+
+
+// changing your vote
+const removeRef = firebase.database().ref(`quizzes/${quiz.id}/options/`)
