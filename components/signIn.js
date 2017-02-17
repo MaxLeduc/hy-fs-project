@@ -18,7 +18,7 @@ export default class SignIn extends React.Component{
     }
 
     render() {
-        if( this.state.mode == 'login' ) {
+        if( this.state.mode === 'login' ) {
             return <div className="sign-up-form">
                 { this.state.error ? <div> {this.state.erorr } </div> : null }
                 <input type="text"
