@@ -83,6 +83,11 @@ class Form extends React.Component {
         delete formValues.newOption
         const firebaseRef = firebase.database().ref('formValues');
         firebaseRef.push(formValues)
+        .then(function (foo) {
+            var windowURL = window.location.href
+            var formKey = foo.key
+            window.location.replace(`${windowURL}renderingformid=${formKey}`)
+        })
     }
 };
 

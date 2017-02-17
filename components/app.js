@@ -25,7 +25,7 @@ class App extends React.Component {
     }
 
     render() {
-        if(this.state.loggedIn) {
+        // if(this.state.loggedIn) {
             return (
                 <div>
                     <Header />
@@ -34,9 +34,9 @@ class App extends React.Component {
                     <Footer/>
                 </div>
             )
-        } else {
-            return <SignIn onLogIn={ (username) => this.login(userName) }/>
-        }
+        // } else {
+        //     return <SignIn onLogIn={ (username) => this.login(userName) }/>
+        // }
     }
 
     componentDidMount() {
