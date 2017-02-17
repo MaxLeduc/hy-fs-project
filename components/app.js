@@ -25,7 +25,7 @@ class App extends React.Component {
     }
 
     render() {
-        if(this.state.loggedIn == true) {
+        if(this.state.loggedIn) {
             return (
                 <div>
                     <Header />
