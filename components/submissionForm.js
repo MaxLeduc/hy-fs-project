@@ -5,7 +5,7 @@ import Heading from './heading';
 import Preview from './preview';
 import Result from './results';
 
-class SubmissionForm extends React.Component {
+export default class SubmissionForm extends React.Component {
   constructor() {
         super();
         this.state = {
@@ -28,7 +28,7 @@ class SubmissionForm extends React.Component {
         this.addOption = this.addOption.bind(this);
     }
 
-    render() { 
+    render() {
       return <div>
         <Form formObject={ this.state.formObject } updateForm = { this.updateForm } />
         <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
@@ -54,5 +54,3 @@ class SubmissionForm extends React.Component {
         })
     }
 }
-
-export default SubmissionForm
