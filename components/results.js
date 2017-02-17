@@ -18,16 +18,6 @@ class Result extends React.Component {
             </div>
         )
     }
-
-    componentDidMount() {
-      const allOFirebase = firebase.database().ref();
-      allOFirebase.on('value', (snapshot) => {
-        const formValues = snapshot.val();
-        this.setState({
-            formObject: formValues
-        })
-      });
-    }
 }
 
 export default Result;
