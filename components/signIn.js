@@ -25,7 +25,7 @@ export default class SignIn extends React.Component{
                     placeholder="Username"
                     onChange={ (e) => this.setState({userName: e.target.value}) }
                 />
-                <input type="passpwrd"
+                <input type="password"
                     placeholder="Password"
                     onChange={ (e) => this.setState({password: e.target.value}) }
                 />
