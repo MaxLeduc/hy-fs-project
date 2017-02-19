@@ -29,13 +29,17 @@ export default class SubmissionForm extends React.Component {
     }
 
     render() {
-      return <div>
-        <Form formObject={ this.state.formObject } updateForm = { this.updateForm } />
-        <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
-        { this.state.formObject.options.map((option, i) => (
-            <Preview option={ option.desc }
-            key={ i }/>
-        ))}
+      return <div className="submissionFormWrapper">
+        <div className="side-menu">
+            <Form formObject={ this.state.formObject } updateForm = { this.updateForm } />
+        </div>
+        <div className="formLiveRenderWrapper">
+            <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
+            { this.state.formObject.options.map((option, i) => (
+                <Preview option={ option.desc }
+                key={ i }/>
+            ))}
+        </div>
       </div>
     }
 
