@@ -11,14 +11,15 @@ class Form extends React.Component {
     }
 
     render() {
-        return <form>
+        return <form className="entryForm">
 
             <fieldset>
                 <label>Title</label>
                 <input type="textarea"
                         name="title"
                         onChange={ (evt) => this.updateFormObject(evt) }
-                        value={ this.props.formObject.title }/>
+                        value={ this.props.formObject.title }
+                        />
             </fieldset>
 
             <fieldset>
@@ -36,18 +37,20 @@ class Form extends React.Component {
                             name={ i }
                             onChange={ (evt) => this.updateOptionsValues(evt) }
                             value={ option.desc }/>
+                    <div className="deleteBtn">Delete</div>
                 </fieldset>
             ))}
 
-            <fieldset>
+            <fieldset className="addOption">
+                <label>Add an option!</label>
                 <input type="textarea"
                         name="newOption"
                         onChange={ (evt) => this.updateFormObject(evt) }
                         value={ this.props.formObject.newOption }/>
-                <button onClick={(evt) => this.addAnOption(evt)}>Add an option</button>
+                <div className="addBtn" onClick={(evt) => this.addAnOption(evt)}>Add</div>
             </fieldset>
 
-            <button onClick={ (evt) => this.onSubmit(evt)}>Submit</button>
+            <div className="button" onClick={ (evt) => this.onSubmit(evt)}>Submit</div>
 
         </form>
     }
@@ -83,6 +86,11 @@ class Form extends React.Component {
         delete formValues.newOption
         const firebaseRef = firebase.database().ref('formValues');
         firebaseRef.push(formValues)
+        .then(function (foo) {
+            var windowURL = window.location.href
+            var formKey = foo.key
+            window.location.replace(`${windowURL}renderingformid=${formKey}`)
+        })
     }
 };
 

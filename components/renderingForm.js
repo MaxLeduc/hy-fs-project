@@ -11,16 +11,33 @@ export default class RenderingForm extends React.Component {
   constructor() {
         super();
         this.state = {
-            formValues: []
+          formObject: {
+            title: '',
+            desc: '',
+            options: [
+                {
+                    'desc': '',
+                    'users': []
+                }, {
+                    'desc': '',
+                    'users': []
+                }
+            ]
+          }
         };
         this.updateForm = this.updateForm.bind(this);
         this.addOption = this.addOption.bind(this);
     }
 
     render() {
-        return <div>{this.state.formValues}<p>sup</p></div>
+        return <div>
+          <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
+          { this.state.formObject.options.map((option, i) => (
+              <Preview option={ option.desc }
+              key={ i }/>
+          ))}
+      </div>
     }
-
 
     addOption(options) {
         this.setState({
@@ -37,9 +54,13 @@ export default class RenderingForm extends React.Component {
     }
 
     componentDidMount() {
-      const allOFirebase = firebase.database().ref();
+      var windowURL = window.location.href
+      windowURL = windowURL.split('=').pop()
+      const allOFirebase = firebase.database().ref('formValues');
       allOFirebase.on('value', (snapshot) => {
         const formValues = snapshot.val();
+        console.log(formValues[windowURL])
+        this.setState({formObject: formValues[windowURL]})
       });
     }
 }
