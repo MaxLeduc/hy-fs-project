@@ -10,7 +10,7 @@ export default class SignUp extends React.Component{
             userName: '',
             password: '',
             email: '',
-            erorr: null
+            error: null
         }
 
         this.signUp = this.signUp.bind(this);
@@ -18,7 +18,7 @@ export default class SignUp extends React.Component{
 
     render() {
         return <div>
-            { this.state.error ? <div>{ this.state.erorr}</div> : null }
+            { this.state.error ? <div>{ this.state.error}</div> : null }
             <input type="text"
                 placeholder="Your Name"
                 onChange={ (e) => this.setState({userName: e.target.value})}
@@ -31,16 +31,16 @@ export default class SignUp extends React.Component{
                 placeholder="Your Passowrd"
                 onChange={ (e) => this.setState({password: e.target.value})}
             />
-            <button onClick={(e) => this.signUp()}>Sign Me UP! </button>
+            <button onClick={(e) => this.signUp(e)}>Sign Me UP! </button>
         </div>
     }
 
-    signUp() {
+    signUp(e) {
+        e.preventDefault()
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-        .then((user) => {
-            console.log(user)
-        })
-        .then((user) => this.props.onLogin(this.state.userName))
+        .then((user) => user.updateProfile({
+          displayName: this.state.userName
+        }))
         .catch((err) => this.setState({error: err.message}))
     }
 }

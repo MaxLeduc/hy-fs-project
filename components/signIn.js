@@ -8,7 +8,7 @@ export default class SignIn extends React.Component{
     constructor() {
         super();
         this.state={
-            userName: '',
+            email: '',
             password:'',
             mode: 'login',
             error: null
@@ -20,26 +20,27 @@ export default class SignIn extends React.Component{
     render() {
         if( this.state.mode === 'login' ) {
             return <div className="sign-up-form">
-                { this.state.error ? <div> {this.state.erorr } </div> : null }
+                { this.state.error ? <div> {this.state.error } </div> : null }
                 <input type="text"
-                    placeholder="Username"
-                    onChange={ (e) => this.setState({userName: e.target.value}) }
+                    placeholder="Email"
+                    onChange={ (e) => this.setState({email: e.target.value}) }
                 />
                 <input type="password"
                     placeholder="Password"
                     onChange={ (e) => this.setState({password: e.target.value}) }
                 />
-                <button onClick={(e) => this.signin()}>Sign In</button>
-                <a href="#" onClick={ (e) => this.setState({mode: 'signup'})}>Don't have a login? Sign Up! </a>
+                <button onClick={(e) => this.signin(e)}>Sign In</button>
+                <a href="#" onClick={ (e) => this.setState({mode: 'signup'})}>Dont have a login? Sign Up! </a>
             </div>
         } else {
             return <SignUp onLogin={ this.props.onLogIn }/>
         }
     }
 
-    signin() {
-        firebase.auth().signInWithEmailAndPassword(this.state.userName, this.state.password)
-        .then((user) => console.log(user))
-        .catch((err) => this.setState({erorr: err.message }))
+    signin(e) {
+        e.preventDefault()
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((user) => this.setState({ userName: user.displayName }))
+        .catch((err) => this.setState({ error: err.message }))
     }
 }
