@@ -59,8 +59,7 @@ export default class RenderingForm extends React.Component {
       const allOFirebase = firebase.database().ref('formValues');
       allOFirebase.on('value', (snapshot) => {
         const formValues = snapshot.val();
-        console.log(formValues[windowURL])
-        this.setState({formObject: formValues[windowURL]})
+        formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
       });
     }
 }
