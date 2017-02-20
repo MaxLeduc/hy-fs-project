@@ -4,14 +4,11 @@ import ReactDom from 'react-dom';
 import firebase from 'firebase';
 import './database.js';
 
-import Header from './header';
-import SubmissionForm from './submissionForm';
-import RenderingForm from './renderingForm';
-import Result from './results';
-import AddOption from './addOption';
 import Footer from './footer';
-
+import Header from './header';
+import RenderingForm from './renderingForm';
 import SignIn from './signIn';
+import SubmissionForm from './submissionForm';
 
 export default class App extends React.Component {
     constructor() {
@@ -20,47 +17,29 @@ export default class App extends React.Component {
             loggedIn: false,
             currentUser: null
         }
-        this.calculateVotes = this.calculateVotes.bind(this);
-        this.login = this.login.bind(this);
     }
 
     render() {
         if(this.state.loggedIn) {
             return (
                 <div>
-                    <Header />
+                    <Header currentUser={ this.state.currentUser }/>
                     <SubmissionForm />
                     <Footer/>
                 </div>
             )
         } else {
-            return <SignIn onLogIn={ (username) => this.login(userName) }/>
+            return <SignIn />
         }
     }
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
-            if(user) {
+            if (user) {
                 this.setState({ loggedIn: true, currentUser: user.displayName })
             } else {
                 this.setState({ loggedIn: false })
             }
-        })
-    }
-
-    login(userName) {
-        this.setState({ currentUser: userName })
-    }
-
-    calculateVotes(i) {
-        const options = this.state.formObject.options;
-        options[i].votes = options[i].votes + 1;
-        this.setState({
-            issues: [
-                {
-                    options: options
-                }
-            ]
         })
     }
 }
