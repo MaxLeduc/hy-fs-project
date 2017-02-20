@@ -13,7 +13,7 @@ import Footer from './footer';
 
 import SignIn from './signIn';
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -25,18 +25,17 @@ class App extends React.Component {
     }
 
     render() {
-        // if(this.state.loggedIn) {
+        if(this.state.loggedIn) {
             return (
                 <div>
                     <Header />
                     <SubmissionForm />
-                    <RenderingForm />
                     <Footer/>
                 </div>
             )
-        // } else {
-        //     return <SignIn onLogIn={ (username) => this.login(userName) }/>
-        // }
+        } else {
+            return <SignIn onLogIn={ (username) => this.login(userName) }/>
+        }
     }
 
     componentDidMount() {
@@ -65,5 +64,3 @@ class App extends React.Component {
         })
     }
 }
-
-export default App;

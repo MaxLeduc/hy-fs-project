@@ -31,14 +31,15 @@ export default class SignUp extends React.Component{
                 placeholder="Your Passowrd"
                 onChange={ (e) => this.setState({password: e.target.value})}
             />
-            <button onClick={(e) => this.signUp()}>Sign Me UP! </button>
+            <button onClick={(e) => this.signUp(e)}>Sign Me UP! </button>
         </div>
     }
 
-    signUp() {
+    signUp(e) {
+        e.preventDefault();
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then((user) => {
-            console.log(user)
+            console.log(user.uid)
         })
         .then((user) => this.props.onLogin(this.state.userName))
         .catch((err) => this.setState({error: err.message}))
