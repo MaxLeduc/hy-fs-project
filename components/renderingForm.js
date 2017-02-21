@@ -8,48 +8,39 @@ import Preview from './preview';
 import Result from './results';
 
 export default class RenderingForm extends React.Component {
-  constructor() {
+    constructor() {
         super();
         this.state = {
-          formObject: {
-            title: '',
-            desc: '',
-            options: [
-                {
-                    'desc': '',
-                    'users': []
-                }, {
-                    'desc': '',
-                    'users': []
-                }
-            ]
-          }
+            formObject: {
+                title: '',
+                desc: '',
+                options: [
+                    {
+                        'desc': '',
+                        'users': []
+                    }, {
+                        'desc': '',
+                        'users': []
+                    }
+                ]
+            }
         };
         this.updateForm = this.updateForm.bind(this);
-        this.addOption = this.addOption.bind(this);
-    }
-
-    render() {
-        return <div>
-          <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
-          { this.state.formObject.options.map((option, i) => (
-              <Preview option={ option.desc }
-              key={ i }/>
-          ))}
-      </div>
-    }
-
-    addOption(options) {
-        this.setState({
-            formObject: [{
-                options: options
-            }]
-        })
+        this.onVote = this.onVote.bind(this)
     }
 
     updateForm(formValues) {
-        this.setState({
-            formObject: formValues
+        this.setState({formObject: formValues})
+    }
+
+    onVote(i, users) {
+        let options = this.state.formObject.options;
+        options[i].users = users;
+        const formValues = this.state.formObject;
+        formValues.options = options;
+        const allOFirebase = firebase.database().ref('formValues');
+        allOFirebase.on('value', (snapshot) => {
+            this.setState({formObject: formValues})
         })
     }
 
@@ -61,5 +52,18 @@ export default class RenderingForm extends React.Component {
         const formValues = snapshot.val();
         formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
       });
+    }
+    
+    render() {
+        return <div>
+            <Heading title={ this.state.formObject.title }
+                    desc={ this.state.formObject.desc }/>
+            {this.state.formObject.options.map((option, i) => (
+                <Preview option={ option.desc }
+                        key={ i }
+                        votes={ option.users ? option.users : null }
+                        onVote={ (users) => this.onVote(i, users) }/>
+            ))}
+        </div>
     }
 }

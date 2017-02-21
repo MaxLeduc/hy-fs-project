@@ -10,7 +10,7 @@ import RenderingForm from './renderingForm';
 import SignIn from './signIn';
 import SubmissionForm from './submissionForm';
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -25,7 +25,6 @@ class App extends React.Component {
                 <div>
                     <Header currentUser={ this.state.currentUser }/>
                     <SubmissionForm />
-                    <RenderingForm />
                     <Footer/>
                 </div>
             )
@@ -44,5 +43,3 @@ class App extends React.Component {
         })
     }
 }
-
-export default App;
