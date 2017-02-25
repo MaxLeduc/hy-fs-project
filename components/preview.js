@@ -12,14 +12,14 @@ export default class Preview extends React.Component{
     render() {
         return <div key= { this.props.datakey }>
             <span onClick={ this.getCurrentUser }>{ this.props.option }</span>
-            <span> { this.props.votes ? this.props.votes.length : null}</span>
+            <span> { this.props.votes ? this.props.votes.length - 1 : null}</span>
         </div>
     }
 
     getCurrentUser() {
-        let users = [];
+        let users = [0];
         const user = firebase.auth().currentUser.uid;
-        users.push(user)
-        this.props.onVote(users)
+        users.push(user);
+        this.props.onVote(users);
     }
 }

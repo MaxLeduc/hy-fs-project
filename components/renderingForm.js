@@ -17,10 +17,10 @@ export default class RenderingForm extends React.Component {
                 options: [
                     {
                         'desc': '',
-                        'users': []
+                        'users': [0]
                     }, {
                         'desc': '',
-                        'users': []
+                        'users': [0]
                     }
                 ]
             }
@@ -38,9 +38,16 @@ export default class RenderingForm extends React.Component {
         options[i].users = users;
         const formValues = this.state.formObject;
         formValues.options = options;
-        const allOFirebase = firebase.database().ref('formValues');
-        allOFirebase.on('value', (snapshot) => {
-            this.setState({formObject: formValues})
+
+        var windowURL = window.location.href
+        windowURL = windowURL.split('=').pop()
+
+        const currentIssue = firebase.database().ref('formValues/' + windowURL);
+
+        currentIssue.set({
+            title: this.state.formObject.title,
+            desc: this.state.formObject.desc,
+            options: options
         })
     }
 
@@ -51,9 +58,10 @@ export default class RenderingForm extends React.Component {
       allOFirebase.on('value', (snapshot) => {
         const formValues = snapshot.val();
         formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
+        console.log(formValues[windowURL].options)
       });
     }
-    
+
     render() {
         return <div>
             <Heading title={ this.state.formObject.title }
