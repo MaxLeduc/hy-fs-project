@@ -35,33 +35,34 @@ export default class RenderingForm extends React.Component {
     }
 
     render() {
+        const { title, desc, options } = this.state.formObject;
         return <div>
-            <FormHeading title={ this.state.formObject.title }
-                    desc={ this.state.formObject.desc }/>
-            {this.state.formObject.options.map((option, i) => (
+            <FormHeading title={ title } desc={ desc }/>
+            { options.map((option, i) => (
                 <Preview option={ option.desc }
-                        key={ i }
-                        optionKey={i}
-                        votes={ option.users ? option.users : null }
-                        setTheUser={(key) => this.setCurrentUser (key)}
-                        />
+                         key={ i }
+                         optionKey={ i }
+                         votes={ option.users ? option.users : null }
+                         setTheUser={ (key) => this.setCurrentUser(key) }/>
             ))}
         </div>
     }
 
     componentDidMount() {
-      var windowURL = this.getCurrentVoteURL()
-      const allOFirebase = firebase.database().ref('formValues');
-      allOFirebase.on('value', (snapshot) => {
-        const formValues = snapshot.val();
-        formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
-      });
+        var windowURL = this.getCurrentVoteURL()
+        const allOFirebase = firebase.database().ref('formValues');
+        allOFirebase.on('value', (snapshot) => {
+            const formValues = snapshot.val();
+            formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
+        });
     }
 
     setCurrentUser(key) {
         const user = firebase.auth().currentUser.uid;
         this.setState({currentUser: user})
-        setTimeout(function() { this.onVote(key); }.bind(this));
+        setTimeout(function() {
+            this.onVote(key);
+        }.bind(this));
     }
 
     onVote(key) {
@@ -95,19 +96,11 @@ export default class RenderingForm extends React.Component {
 
     updateFirebaseUsers() {
         let currentIssueKey = this.getCurrentVoteURL();
-        console.log(currentIssueKey)
         let formObject = Object.assign(this.state.formObject);
-        console.log(formObject)
         const database = firebase.database().ref('formValues/' + currentIssueKey);
-        database.set({
-            title: formObject.title,
-            desc: formObject.desc,
-            options: formObject.options
-        })
-        .then(function () {
+        database.set({title: formObject.title, desc: formObject.desc, options: formObject.options}).then(function() {
             console.log('sync successful');
-        })
-        .catch(function (err) {
+        }).catch(function(err) {
             console.log(err);
         })
     }

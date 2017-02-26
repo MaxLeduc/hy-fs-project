@@ -1,13 +1,14 @@
 import React from 'react';
 import firebase from 'firebase';
 
-class Form extends React.Component {
+export default class Form extends React.Component {
     constructor() {
         super();
         this.updateFormObject = this.updateFormObject.bind(this);
         this.updateOptionsValues = this.updateOptionsValues.bind(this);
         this.addAnOption = this.addAnOption.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.deleteAnOption = this.deleteAnOption.bind(this);
     }
 
     render() {
@@ -37,7 +38,8 @@ class Form extends React.Component {
                             name={ i }
                             onChange={ (evt) => this.updateOptionsValues(evt) }
                             value={ option.desc }/>
-                    <div className="deleteBtn">Delete</div>
+                    <div className="deleteBtn"
+                        onClick={ (evt) => this.deleteAnOption(evt, i) } >Delete</div>
                 </fieldset>
             ))}
 
@@ -80,6 +82,15 @@ class Form extends React.Component {
         this.props.updateForm(formValues)
     }
 
+    deleteAnOption(evt, i) {
+        let options = this.props.formObject.options;
+        let formValues = Object.assign(this.props.formObject);
+        options = options.filter((option, j) => i != j);
+
+        formValues.options = options;
+        this.props.updateForm(formValues);
+    }
+
     onSubmit(evt) {
         evt.preventDefault();
         const formValues = Object.assign(this.props.formObject);
@@ -93,5 +104,3 @@ class Form extends React.Component {
         })
     }
 };
-
-export default Form;
