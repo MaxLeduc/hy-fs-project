@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Form from './form';
-import Heading from './heading';
+import FormHeading from './formHeading';
 import Preview from './preview';
 import Result from './results';
 
@@ -15,10 +15,10 @@ export default class SubmissionForm extends React.Component {
                 options: [
                     {
                         'desc': '',
-                        'users': []
+                        'users': [0]
                     }, {
                         'desc': '',
-                        'users': []
+                        'users': [0]
                     }
                 ],
                 newOption: ''
@@ -34,7 +34,7 @@ export default class SubmissionForm extends React.Component {
             <Form formObject={ this.state.formObject } updateForm = { this.updateForm } />
         </div>
         <div className="formLiveRenderWrapper">
-            <Heading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
+            <FormHeading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
             { this.state.formObject.options.map((option, i) => (
                 <Preview option={ option.desc }
                 key={ i }/>

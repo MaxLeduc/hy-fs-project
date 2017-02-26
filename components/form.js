@@ -75,7 +75,7 @@ class Form extends React.Component {
         let inputValue = evt.target.value;
         let formValues = Object.assign(this.props.formObject);
 
-        formValues.options.push({'desc': formValues.newOption, 'votes': 0});
+        formValues.options.push({'desc': formValues.newOption, 'users': [0]});
         formValues.newOption = '';
         this.props.updateForm(formValues)
     }

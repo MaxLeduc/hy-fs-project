@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Heading extends React.Component{
+class FormHeading extends React.Component{
     render() {
         return <div>
             <h2>{ this.props.title }</h2>
@@ -9,4 +9,4 @@ class Heading extends React.Component{
     }
 }
 
-export default Heading
+export default FormHeading
