@@ -23,7 +23,7 @@ export default class App extends React.Component {
         if(this.state.loggedIn) {
             return (
                 <div>
-                    <Header currentUser={ this.state.currentUser }/>
+                    <Header />
                     <SubmissionForm />
                     <Footer/>
                 </div>
@@ -42,4 +42,14 @@ export default class App extends React.Component {
             }
         })
     }
+
+    getChildContext() {
+      return {
+        currentUser: this.state.currentUser
+      }
+    }
+}
+
+App.childContextTypes = {
+  currentUser: React.PropTypes.string
 }

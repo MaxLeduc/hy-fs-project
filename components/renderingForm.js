@@ -2,10 +2,12 @@ import React from 'react'
 
 import firebase from 'firebase';
 
+import Header from './header';
 import Form from './form';
 import FormHeading from './formHeading';
 import Preview from './preview';
 import Result from './results';
+import Footer from './footer'
 
 export default class RenderingForm extends React.Component {
     constructor() {
@@ -36,16 +38,22 @@ export default class RenderingForm extends React.Component {
 
     render() {
         return <div>
-            <FormHeading title={ this.state.formObject.title }
-                    desc={ this.state.formObject.desc }/>
-            {this.state.formObject.options.map((option, i) => (
-                <Preview option={ option.desc }
-                        key={ i }
-                        optionKey={i}
-                        votes={ option.users ? option.users : null }
-                        setTheUser={(key) => this.setCurrentUser (key)}
-                        />
-            ))}
+            <Header />
+            <div className="wrapper">
+                <div className="formRenderWrapper">
+                    <FormHeading title={ this.state.formObject.title }
+                            desc={ this.state.formObject.desc }/>
+                    {this.state.formObject.options.map((option, i) => (
+                        <Preview option={ option.desc }
+                                key={ i }
+                                optionKey={i}
+                                votes={ option.users ? option.users : null }
+                                setTheUser={(key) => this.setCurrentUser (key)}
+                                />
+                    ))}
+                </div>
+            </div>
+            <Footer />
         </div>
     }
 
