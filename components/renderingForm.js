@@ -35,16 +35,15 @@ export default class RenderingForm extends React.Component {
     }
 
     render() {
+        const { title, desc, options } = this.state.formObject;
         return <div>
-            <FormHeading title={ this.state.formObject.title }
-                    desc={ this.state.formObject.desc }/>
-            {this.state.formObject.options.map((option, i) => (
+            <FormHeading title={ title } desc={ desc }/>
+            { options.map((option, i) => (
                 <Preview option={ option.desc }
-                        key={ i }
-                        optionKey={i}
-                        votes={ option.users ? option.users : null }
-                        setTheUser={(key) => this.setCurrentUser (key)}
-                        />
+                         key={ i }
+                         optionKey={ i }
+                         votes={ option.users ? option.users : null }
+                         setTheUser={ (key) => this.setCurrentUser(key) }/>
             ))}
         </div>
     }
@@ -98,15 +97,9 @@ export default class RenderingForm extends React.Component {
         let currentIssueKey = this.getCurrentVoteURL();
         let formObject = Object.assign(this.state.formObject);
         const database = firebase.database().ref('formValues/' + currentIssueKey);
-        database.set({
-            title: formObject.title,
-            desc: formObject.desc,
-            options: formObject.options
-        })
-        .then(function () {
+        database.set({title: formObject.title, desc: formObject.desc, options: formObject.options}).then(function() {
             console.log('sync successful');
-        })
-        .catch(function (err) {
+        }).catch(function(err) {
             console.log(err);
         })
     }
