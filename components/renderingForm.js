@@ -49,20 +49,18 @@ export default class RenderingForm extends React.Component {
     }
 
     componentDidMount() {
-        var windowURL = this.getCurrentVoteURL()
-        const allOFirebase = firebase.database().ref('formValues');
-        allOFirebase.on('value', (snapshot) => {
-            const formValues = snapshot.val();
-            formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
-        });
+      var windowURL = this.getCurrentVoteURL();
+      const allOFirebase = firebase.database().ref('formValues');
+      allOFirebase.on('value', (snapshot) => {
+        const formValues = snapshot.val();
+        formValues[windowURL] ? this.setState({formObject: formValues[windowURL]}) : '';
+      });
     }
 
     setCurrentUser(key) {
         const user = firebase.auth().currentUser.uid;
-        this.setState({currentUser: user})
-        setTimeout(function() {
-            this.onVote(key);
-        }.bind(this));
+        this.setState({currentUser: user});
+        setTimeout(function() { this.onVote(key); }.bind(this));
     }
 
     onVote(key) {
@@ -71,7 +69,7 @@ export default class RenderingForm extends React.Component {
             console.log('you have already voted!')
         } else {
             this.pushCurrentUserInLocalOptions(key);
-            this.updateFirebaseUsers()
+            this.updateFirebaseUsers();
         }
     }
 
@@ -82,7 +80,7 @@ export default class RenderingForm extends React.Component {
     }
 
     verifyIfUserHasVoted() {
-        let formObject = Object.assign(this.state.formObject)
+        let formObject = Object.assign(this.state.formObject);
         let users = formObject.options.map(option => option.users);
         let flattenedUsers = [].concat.apply([], users);
         const didUserVote = flattenedUsers.indexOf(this.state.currentUser) > -1;
@@ -92,6 +90,7 @@ export default class RenderingForm extends React.Component {
     pushCurrentUserInLocalOptions(key) {
         let formObject = Object.assign(this.state.formObject);
         formObject.options[key].users.push(this.state.currentUser);
+        this.setState({formObject: formObject});
     }
 
     updateFirebaseUsers() {
