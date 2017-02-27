@@ -1,0 +1,40 @@
+header {
+	text-align: center;
+	padding-bottom: 20px;
+
+	h1 {
+		color: #8A0707;
+		font-weight: normal;
+	}
+
+	p {
+		padding-bottom: 15px;
+		font-style: italic;
+	}
+
+	.userInformation {
+		text-align: right;
+		padding-right: 50px;
+
+		button, p {
+			display: inline-block;
+		}
+
+		p {
+			padding-right: 15px;
+			margin: 0;
+		}
+
+		button {
+			background-color: white;
+			border: 1px solid #8A0707;
+			border-radius: 5px;
+			cursor: pointer;
+
+			&:hover {
+				background-color: #8A0707;
+				color: white;	
+			}
+		}
+	}
+}

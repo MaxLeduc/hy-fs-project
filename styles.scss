@@ -1,76 +1,11 @@
-h1 {
-	color: red;
-}
+@import './scss/header.scss';
 
-.submissionFormWrapper {
-	display: flex;
-	max-width: 1200px;
-	margin: 0 auto;
-}
+@import './scss/submission-form.scss';
 
-.side-menu {
-	width: calc(30% - 20px);
-	border: 1px solid #303030;
-	padding: 30px 10px;
-	margin-right: 20px;
-}
+@import './scss/rendering-form.scss';
 
-.entryForm {
-	fieldset {
-		border: none;
-		padding-bottom: 20px;
-	}
-
-	label {
-		display: block;
-		padding-bottom: 10px;
-	}
-
-	input[type=textarea] {
-		width: 100%;
-		margin-bottom: 10px;
-		padding-bottom: 40px;
-	}
-
-	.button {
-		padding: 10px 5px;
-		background-color: #99ccff;
-		border-radius: 5px;
-		border-shadow: none;
-		color: white;
-		text-align: center;
-		cursor: pointer;
-
-		&:hover {
-			background-color: #80bfff;
-		}
-	}
-
-	.addBtn,
-	.deleteBtn {
-		background-color: #f9f9f9;
-		display: inline-block;
-		text-align: right;
-		padding: 5px 10px;
-		border-radius: 5px;
-		cursor: pointer;
-	}
-
-	.addOption {
-		border-top: 1px dashed #e9e9e9;
-		padding-top: 20px;
-		border-bottom: 1px dashed #e9e9e9;
-		padding-bottom: 20px;
-		margin-bottom: 30px;
-	}
-}
-
-
-.formLiveRenderWrapper {
-	width: 80%;
-	background-color: #f9f9f9;
-	padding: 40px;
-	box-shadow: 1px 1px 1px #efefef;
+.wrapper {
+	max-width: 1280px;
 }
 
 footer {

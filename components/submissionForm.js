@@ -4,6 +4,7 @@ import Form from './form';
 import FormHeading from './formHeading';
 import Preview from './preview';
 import Result from './results';
+import Footer from './footer'
 
 export default class SubmissionForm extends React.Component {
   constructor() {
@@ -29,18 +30,21 @@ export default class SubmissionForm extends React.Component {
     }
 
     render() {
-      return <div className="submissionFormWrapper">
-        <div className="side-menu">
-            <Form formObject={ this.state.formObject } updateForm = { this.updateForm } />
+      return <div>
+          <div className="submissionFormWrapper">
+            <div className="side-menu">
+                <Form formObject={ this.state.formObject } updateForm = { this.updateForm } />
+            </div>
+            <div className="formLiveRenderWrapper">
+                <FormHeading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
+                { this.state.formObject.options.map((option, i) => (
+                    <Preview option={ option.desc }
+                    key={ i }/>
+                ))}
+            </div>
+          </div>
+          <Footer />
         </div>
-        <div className="formLiveRenderWrapper">
-            <FormHeading title={ this.state.formObject.title} desc={ this.state.formObject.desc } />
-            { this.state.formObject.options.map((option, i) => (
-                <Preview option={ option.desc }
-                key={ i }/>
-            ))}
-        </div>
-      </div>
     }
 
 
