@@ -24,12 +24,16 @@ export default class App extends React.Component {
             return (
                 <div>
                     <Header />
-                    <SubmissionForm />
-                    <Footer/>
+                    { this.props.children }
                 </div>
             )
         } else {
-            return <SignIn />
+            return (
+                <div>
+                    <Header />
+                    <SignIn />
+                </div>
+            )
         }
     }
 

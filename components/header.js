@@ -10,11 +10,11 @@ class Header extends React.Component {
     render() {
         return <header>
             <div className="wrapper">
-                <h1>The Vote-O-Tron</h1>
-                <p>You'll never have to make another undemocratic decision, EVER!</p>
+                <h1><a href="/">The Vote-O-Tron</a></h1>
+                <p>Youll never have to make another undemocratic decision, EVER AGAINS!</p>
                 <div className="userInformation">
-                    { this.context.currentUser? <p>Hello, this.context.currentUser </p> : '' }
-                    <button onClick={ (evt) => this.signout() }>Sign out</button>
+                    { this.context.currentUser? <p>Hello, {this.context.currentUser} </p> : '' }
+                    { this.context.currentUser? <button onClick={ (evt) => this.signout() }>Sign out</button> : '' }
                 </div>
             </div>
         </header>

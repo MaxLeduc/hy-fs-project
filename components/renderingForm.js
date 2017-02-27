@@ -38,7 +38,6 @@ export default class RenderingForm extends React.Component {
 
     render() {
         return <div>
-            <Header />
             <div className="wrapper">
                 <div className="formRenderWrapper">
                     <FormHeading title={ this.state.formObject.title }
