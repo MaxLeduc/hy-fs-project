@@ -6,7 +6,6 @@ import Header from './header';
 import Form from './form';
 import FormHeading from './formHeading';
 import Preview from './preview';
-import Result from './results';
 import Footer from './footer'
 
 export default class RenderingForm extends React.Component {

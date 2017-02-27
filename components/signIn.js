@@ -19,22 +19,24 @@ export default class SignIn extends React.Component{
 
     render() {
         if( this.state.mode === 'login' ) {
-            return <div className="sign-up-form">
-                { this.state.error ? <div> {this.state.error } </div> : null }
-                <input type="text"
-                    placeholder="Email"
-                    onChange={ (e) => this.setState({email: e.target.value}) }
-                />
-                <input type="password"
-                    placeholder="Password"
-                    onChange={ (e) => this.setState({password: e.target.value}) }
-                />
-                <button onClick={(e) => this.signin(e)}>Sign In</button>
-                <a href="#" onClick={ (e) => this.setState({mode: 'signup'})}>Dont have a login? Sign Up! </a>
-            </div>
+            return <main className="loginFormWrapper">
+                <div className="loginForm">
+                    { this.state.error ? <div> {this.state.error } </div> : null }
+                    <input type="text"
+                        placeholder="Email"
+                        onChange={ (e) => this.setState({email: e.target.value}) }
+                    />
+                    <input type="password"
+                        placeholder="Password"
+                        onChange={ (e) => this.setState({password: e.target.value}) }
+                    />
+                    <button onClick={(e) => this.signin(e)}>Sign In</button>
+                    <a href="#" onClick={ (e) => this.setState({mode: 'signup'})}>Dont have a login? Sign Up! </a>
+                </div>
+            </main>
         } else {
             return <SignUp onLogin={ this.props.onLogIn }
-            login={ (mode) => this.toggleSignIn(mode) }/>
+                        login={ (mode) => this.toggleSignIn(mode) }/>
         }
     }
 

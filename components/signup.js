@@ -18,23 +18,25 @@ export default class SignUp extends React.Component{
     }
 
     render() {
-        return <div>
-            { this.state.error ? <div>{ this.state.error}</div> : null }
-            <input type="text"
-                placeholder="Your Name"
-                onChange={ (e) => this.setState({userName: e.target.value})}
-            />
-            <input type="email"
-                placeholder="Your Email"
-                onChange={ (e) => this.setState({email: e.target.value})}
-            />
-            <input type="password"
-                placeholder="Your Passowrd"
-                onChange={ (e) => this.setState({password: e.target.value})}
-            />
-            <button onClick={(e) => this.signUp(e)}>Sign Me UP! </button>
-            <p>Already have an account? <a href="#" onClick={ (e) => this.signIn(e) }>Log in!</a></p>
-        </div>
+        return <main className="loginFormWrapper">
+            <div className="loginForm">
+                { this.state.error ? <div>{ this.state.error}</div> : null }
+                <input type="text"
+                    placeholder="Your Name"
+                    onChange={ (e) => this.setState({userName: e.target.value})}
+                />
+                <input type="email"
+                    placeholder="Your Email"
+                    onChange={ (e) => this.setState({email: e.target.value})}
+                />
+                <input type="password"
+                    placeholder="Your Passowrd"
+                    onChange={ (e) => this.setState({password: e.target.value})}
+                />
+                <button onClick={(e) => this.signUp(e)}>Sign Me UP! </button>
+                <a href="#" onClick={ (e) => this.signIn(e) }>Already have an account? Log in!</a>
+            </div>
+        </main>
     }
 
     signUp(e) {
