@@ -37,6 +37,7 @@ export default class RenderingForm extends React.Component {
     }
 
     render() {
+        const { title, desc, options } = this.state.formObject;
         return <div>
             <div className="wrapper">
                 <div className="formRenderWrapper">
@@ -105,15 +106,9 @@ export default class RenderingForm extends React.Component {
         let currentIssueKey = this.getCurrentVoteURL();
         let formObject = Object.assign(this.state.formObject);
         const database = firebase.database().ref('formValues/' + currentIssueKey);
-        database.set({
-            title: formObject.title,
-            desc: formObject.desc,
-            options: formObject.options
-        })
-        .then(function () {
+        database.set({title: formObject.title, desc: formObject.desc, options: formObject.options}).then(function() {
             console.log('sync successful');
-        })
-        .catch(function (err) {
+        }).catch(function(err) {
             console.log(err);
         })
     }
