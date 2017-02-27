@@ -14,6 +14,7 @@ export default class SignUp extends React.Component{
         }
 
         this.signUp = this.signUp.bind(this);
+        this.signIn = this.signIn.bind(this);
     }
 
     render() {
@@ -32,6 +33,7 @@ export default class SignUp extends React.Component{
                 onChange={ (e) => this.setState({password: e.target.value})}
             />
             <button onClick={(e) => this.signUp(e)}>Sign Me UP! </button>
+            <p>Already have an account? <a href="#" onClick={ (e) => this.signIn(e) }>Log in!</a></p>
         </div>
     }
 
@@ -42,5 +44,10 @@ export default class SignUp extends React.Component{
           displayName: this.state.userName
         }))
         .catch((err) => this.setState({error: err.message}))
+    }
+
+    signIn(e) {
+        const mode = 'login';
+        this.props.login(mode)
     }
 }

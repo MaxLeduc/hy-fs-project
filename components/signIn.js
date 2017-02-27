@@ -33,7 +33,8 @@ export default class SignIn extends React.Component{
                 <a href="#" onClick={ (e) => this.setState({mode: 'signup'})}>Dont have a login? Sign Up! </a>
             </div>
         } else {
-            return <SignUp onLogin={ this.props.onLogIn }/>
+            return <SignUp onLogin={ this.props.onLogIn }
+            login={ (mode) => this.toggleSignIn(mode) }/>
         }
     }
 
@@ -42,5 +43,9 @@ export default class SignIn extends React.Component{
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((user) => this.setState({ userName: user.displayName }))
         .catch((err) => this.setState({ error: err.message }))
+    }
+
+    toggleSignIn(mode) {
+        this.setState({mode: mode})
     }
 }
