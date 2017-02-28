@@ -2,14 +2,19 @@ header {
 	text-align: center;
 	padding-bottom: 20px;
 
-	h1 {
+	.header-title {
 		color: #8A0707;
 		font-weight: normal;
+		text-decoration: none;
+		border: 2px solid #8A0707;
+		padding: 10px 20px;
+		margin-bottom: 30px;
 	}
 
 	p {
-		padding-bottom: 15px;
+		padding: 10px 0;
 		font-style: italic;
+		margin: 0;
 	}
 
 	.userInformation {
